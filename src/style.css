@@ -1,0 +1,534 @@
+/* --- CSS Variables --- */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-sidebar: #e9ecef;
+    --bg-hover: #dee2e6;
+    --bg-active: #007bff;
+    --text-primary: #343a40;
+    --text-secondary: #6c757d;
+    --text-on-active: #ffffff;
+    --border-primary: #dee2e6;
+    --border-secondary: #ced4da;
+    --border-accent: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --accent-color-1: #007bff; /* Blue */
+    --accent-color-2: #28a745; /* Green */
+    --accent-color-3: #dc3545; /* Red */
+    --accent-color-4: #ffc107; /* Yellow */
+    --accent-color-5: #17a2b8; /* Info blue */
+
+    /* Priority colors */
+    --priority-low: var(--accent-color-5);
+    --priority-medium: var(--accent-color-4);
+    --priority-high: var(--accent-color-3);
+
+    /* Button colors */
+    --btn-primary-bg: var(--accent-color-1);
+    --btn-primary-hover-bg: #0056b3;
+    --btn-primary-border: var(--accent-color-1);
+    --btn-primary-hover-border: #004085;
+    --btn-success-bg: var(--accent-color-2);
+    --btn-success-hover-bg: #218838;
+    --btn-success-border: var(--accent-color-2);
+    --btn-success-hover-border: #1e7e34;
+    --btn-danger-bg: var(--accent-color-3);
+    --btn-danger-hover-bg: #c82333;
+    --btn-danger-border: var(--accent-color-3);
+    --btn-danger-hover-border: #bd2130;
+    --btn-secondary-bg: var(--text-secondary);
+    --btn-secondary-hover-bg: #5a6268;
+    --btn-secondary-border: var(--text-secondary);
+    --btn-secondary-hover-border: #545b62;
+    --btn-text: #ffffff;
+    --btn-danger-disabled-bg: var(--bg-sidebar);
+    --btn-danger-disabled-text: var(--text-secondary);
+    --btn-danger-disabled-border: var(--border-secondary);
+
+    /* Dialog */
+    --dialog-bg: var(--bg-primary);
+    --dialog-border: var(--border-primary);
+    --dialog-shadow: rgba(0, 0, 0, 0.2);
+    --dialog-backdrop: rgba(0, 0, 0, 0.5);
+    --dialog-header-text: var(--accent-color-1);
+
+    /* Todo item */
+    --todo-item-bg: var(--bg-primary);
+    --todo-item-hover-bg: #f1f3f4; /* Lighter hover for light theme */
+    --todo-item-border: var(--border-accent);
+    --todo-item-completed-opacity: 0.6;
+    --todo-item-completed-text: var(--text-secondary);
+    --todo-action-btn-color: var(--text-secondary);
+    --todo-action-btn-hover-color: var(--text-primary);
+    --todo-details-bg: var(--bg-secondary);
+    --todo-details-border: var(--border-secondary);
+    --todo-details-text: #495057; /* Specific text color for details */
+    --todo-details-strong: var(--text-primary);
+    --todo-overdue-text: var(--accent-color-3);
+}
+
+body.dark-mode {
+    --bg-primary: #212529;
+    --bg-secondary: #343a40;
+    --bg-sidebar: #3c434a; /* Slightly lighter than secondary */
+    --bg-hover: #495057;
+    --bg-active: #0d6efd; /* Slightly different blue for dark */
+    --text-primary: #f8f9fa; /* Reverted back to light text */
+    --text-secondary: #adb5bd; /* Reverted back to light text */
+    --text-on-active: #ffffff;
+    --border-primary: #495057;
+    --border-secondary: #6c757d;
+    --border-accent: #5a6268;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+    --accent-color-1: #0d6efd;
+    --accent-color-2: #198754;
+    --accent-color-3: #dc3545;
+    --accent-color-4: #ffc107;
+    --accent-color-5: #0dcaf0;
+
+    /* Button color overrides for dark mode */
+    --btn-primary-hover-bg: #0b5ed7;
+    --btn-primary-hover-border: #0a58ca;
+    --btn-success-hover-bg: #157347;
+    --btn-success-hover-border: #146c43;
+    --btn-danger-hover-bg: #bb2d3b;
+    --btn-danger-hover-border: #b02a37;
+    --btn-secondary-hover-bg: #5c636a;
+    --btn-secondary-hover-border: #565e64;
+    --btn-danger-disabled-bg: var(--bg-sidebar);
+    --btn-danger-disabled-text: var(--text-secondary);
+    --btn-danger-disabled-border: var(--border-secondary);
+
+    /* Dialog overrides for dark mode */
+    --dialog-bg: var(--bg-primary); /* Explicitly set dark background */
+    --dialog-border: var(--border-primary);
+    --dialog-shadow: rgba(255, 255, 255, 0.2);
+    --dialog-backdrop: rgba(0, 0, 0, 0.7);
+    --dialog-header-text: var(--accent-color-1);
+
+    /* Todo item overrides for dark mode */
+    --todo-item-bg: var(--bg-primary); /* Use primary dark background */
+    --todo-item-hover-bg: #343a40; /* Darker hover for dark theme */
+    --todo-item-border: var(--border-accent);
+    --todo-item-completed-text: var(--text-secondary);
+    --todo-action-btn-color: var(--text-secondary);
+    --todo-action-btn-hover-color: var(--text-primary);
+    --todo-details-bg: var(--bg-secondary);
+    --todo-details-text: var(--text-primary);
+    --todo-details-strong: var(--text-primary);
+    --todo-overdue-text: var(--accent-color-3);
+}
+
+
+/* --- General Styles --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    margin: 0;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#content {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    /* background-color: transparent; - Handled by body */
+    box-shadow: none;
+    border-radius: 0;
+}
+
+h1, h2, h3 {
+    color: var(--text-primary); /* Use variable */
+    margin-top: 0;
+}
+
+button {
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-secondary);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+    background-color: var(--bg-primary); /* Ensure background uses variable */
+    color: var(--text-primary); /* Ensure text color uses variable */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Add transition */
+}
+
+/* --- App Layout --- */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--bg-sidebar);
+    padding: 20px;
+    border-right: 1px solid var(--border-primary);
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: var(--accent-color-1);
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px 40px;
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease;
+}
+
+/* --- Sidebar: Projects List --- */
+#projects-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    flex-grow: 1; /* Takes available space */
+    overflow-y: auto; /* Scroll if needed */
+}
+
+#projects-list li {
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: var(--text-primary); /* Text color for items */
+}
+
+#projects-list li:hover {
+    background-color: var(--bg-hover);
+}
+
+#projects-list li.active {
+    background-color: var(--bg-active);
+    color: var(--text-on-active);
+    font-weight: bold;
+}
+
+/* --- Sidebar: Add Project Form --- */
+.add-project-form {
+    display: flex;
+    align-items: center;
+    margin-top: auto; /* Pushes to the bottom */
+}
+
+#new-project-name {
+    flex-grow: 1;
+    margin-bottom: 0; /* Override general input margin */
+    margin-right: 5px;
+    border-radius: 4px 0 0 4px;
+}
+
+#add-project-btn {
+    background-color: var(--btn-success-bg);
+    color: var(--btn-text);
+    border-color: var(--btn-success-border);
+    border-radius: 0 4px 4px 0;
+    padding: 10px 15px; /* Match input height */
+    font-size: 1.2em;
+    line-height: 1; /* Adjust line height */
+}
+
+#add-project-btn:hover {
+    background-color: var(--btn-success-hover-bg);
+    border-color: var(--btn-success-hover-border);
+}
+
+/* --- Sidebar: Theme Toggle Button --- */
+.theme-toggle-btn {
+    margin-top: 15px; /* Space above the add project form */
+    padding: 8px 12px;
+    font-size: 0.9em;
+    background-color: var(--bg-secondary); /* Blend with sidebar slightly */
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--border-secondary);
+}
+
+/* --- Main Content: Header --- */
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-primary);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+#project-title {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+/* --- Main Content: Todos List --- */
+#todos-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-item {
+    background-color: var(--todo-item-bg);
+    border: 1px solid var(--todo-item-border);
+    border-left-width: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease, opacity 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.todo-item:hover {
+    background-color: var(--todo-item-hover-bg);
+}
+
+.todo-item.completed {
+    opacity: var(--todo-item-completed-opacity);
+}
+
+.todo-item.completed .todo-title {
+    text-decoration: line-through;
+    color: var(--todo-item-completed-text);
+}
+
+/* Priority Indicators */
+.todo-item.priority-low {
+    border-left-color: var(--priority-low);
+}
+.todo-item.priority-medium {
+    border-left-color: var(--priority-medium);
+}
+.todo-item.priority-high {
+    border-left-color: var(--priority-high);
+}
+
+.todo-info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-right: 15px;
+    overflow: hidden; /* Prevent long titles pushing buttons */
+}
+
+.todo-title {
+    font-weight: 500;
+    margin-right: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.todo-dueDate {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-left: auto; /* Pushes date to the right within info */
+    white-space: nowrap;
+}
+
+.todo-dueDate.overdue {
+    color: var(--todo-overdue-text);
+    font-weight: bold;
+}
+
+.todo-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+.todo-actions button {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    margin-left: 8px;
+    padding: 5px;
+    color: var(--todo-action-btn-color);
+    transition: color 0.2s ease;
+}
+
+.todo-actions button:hover {
+    color: var(--todo-action-btn-hover-color);
+}
+
+.todo-actions .complete-btn:hover {
+    color: var(--accent-color-2); /* Green */
+}
+.todo-actions .edit-btn:hover {
+    color: var(--accent-color-1); /* Blue */
+}
+.todo-actions .delete-btn:hover {
+    color: var(--accent-color-3); /* Red */
+}
+
+/* --- Todo Details (Expanded View) --- */
+.todo-details {
+    background-color: #f8f9fa;
+    border-top: 1px dashed #ced4da;
+    padding: 15px;
+    margin-top: 15px;
+    /* Flexbox properties applied by parent (.todo-item when details shown) */
+    flex-basis: 100%; /* Takes full width when shown */
+    font-size: 0.95em;
+    color: #495057;
+}
+
+.todo-details p {
+    margin: 5px 0;
+}
+
+.todo-details strong {
+    color: #343a40;
+}
+
+/* Add Button Styles */
+.add-btn {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-text);
+    border-color: var(--btn-primary-border);
+    padding: 10px 20px;
+    font-size: 1em;
+    display: block; /* Make it block to center easily */
+    margin: 20px auto 0 auto; /* Center horizontally */
+}
+
+.add-btn:hover {
+    background-color: var(--btn-primary-hover-bg);
+    border-color: var(--btn-primary-hover-border);
+}
+
+.danger-btn {
+    background-color: var(--btn-danger-bg);
+    color: var(--btn-text);
+    border-color: var(--btn-danger-border);
+}
+
+.danger-btn:hover {
+    background-color: var(--btn-danger-hover-bg);
+    border-color: var(--btn-danger-hover-border);
+}
+
+.danger-btn:disabled {
+    background-color: var(--btn-danger-disabled-bg);
+    color: var(--btn-danger-disabled-text);
+    border-color: var(--btn-danger-disabled-border);
+    cursor: not-allowed;
+}
+
+/* --- Dialog (Modal) Styles --- */
+dialog {
+    border: 1px solid var(--dialog-border);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px var(--dialog-shadow);
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    background-color: var(--dialog-bg);
+    color: var(--text-primary);
+}
+
+dialog::backdrop {
+    background-color: var(--dialog-backdrop);
+    backdrop-filter: blur(2px);
+}
+
+dialog h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--dialog-header-text);
+}
+
+dialog label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-secondary);
+}
+
+dialog .dialog-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+dialog .dialog-actions button {
+    margin-left: 10px;
+}
+
+dialog .dialog-actions button[type="submit"] {
+    background-color: var(--btn-success-bg);
+    color: var(--btn-text);
+    border-color: var(--btn-success-border);
+}
+
+dialog .dialog-actions button[type="submit"]:hover {
+    background-color: var(--btn-success-hover-bg);
+    border-color: var(--btn-success-hover-border);
+}
+
+dialog .dialog-actions button[type="button"] {
+    background-color: var(--btn-secondary-bg);
+    color: var(--btn-text);
+    border-color: var(--btn-secondary-border);
+}
+
+dialog .dialog-actions button[type="button"]:hover {
+    background-color: var(--btn-secondary-hover-bg);
+    border-color: var(--btn-secondary-hover-border);
+}
+
+/* Responsive adjustments (optional but good) */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+        max-height: 40vh; /* Limit height */
+        overflow-y: auto;
+    }
+    .main-content {
+        padding: 20px;
+    }
+    .todo-info {
+        flex-direction: column; /* Stack title and date */
+        align-items: flex-start;
+    }
+    .todo-dueDate {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
