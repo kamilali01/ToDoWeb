@@ -20,7 +20,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Todo List App', // Sets title if no template
+      template: './src/template.html', // Use our template
+      title: 'Todo List App', // Title used in template
     }),
   ],
   output: {
